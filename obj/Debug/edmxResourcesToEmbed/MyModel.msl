@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CSPModelStoreContainer" CdmEntityContainer="CSPEntities">
+    <EntitySetMapping Name="Items">
+      <EntityTypeMapping TypeName="CSPModel.Item">
+        <MappingFragment StoreEntitySet="Items">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="PricePerUnit" ColumnName="PricePerUnit" />
+          <ScalarProperty Name="Offers" ColumnName="Offers" />
+          <ScalarProperty Name="Supermarket" ColumnName="Supermarket" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="Section" ColumnName="Section" />
+          <ScalarProperty Name="Shelf" ColumnName="Shelf" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="dtmAdded" ColumnName="dtmAdded" />
+          <ScalarProperty Name="ProdID" ColumnName="ProdID" />
+          <ScalarProperty Name="iPrice" ColumnName="iPrice" />
+          <ScalarProperty Name="text_id" ColumnName="text_id" />
+          <ScalarProperty Name="Search" ColumnName="Search" />
+          <ScalarProperty Name="CONCAT" ColumnName="CONCAT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

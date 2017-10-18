@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CSPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Item">
+    <Key>
+      <PropertyRef Name="Description" />
+      <PropertyRef Name="Supermarket" />
+    </Key>
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Price" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="PricePerUnit" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Offers" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Supermarket" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Section" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Shelf" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Brand" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="dtmAdded" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ProdID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="iPrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="text_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Search" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="CONCAT" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="CSPEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Items" EntityType="Self.Item" />
+  </EntityContainer>
+</Schema>
