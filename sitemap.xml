@@ -1,13 +1,55 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.google.com/schemas/sitemap/0.84" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.google.com/schemas/sitemap/0.84 http://www.google.com/schemas/sitemap/0.84/sitemap.xsd">
-  <url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
     <loc>http://www.CompareSupermarketPrices.co.uk/</loc>
     <lastmod>2017-06-18T07:57:31+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.00</priority>
   </url>
   <url>
-    <loc>http://www.CompareSupermarketPrices.co.uk/</loc>
+    <loc>http://comparesupermarketprices.co.uk/Supermarkets/search/Pampers?pageLength=400</loc>
+    <lastmod>2017-06-18T07:57:31+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>http://comparesupermarketprices.co.uk/Supermarkets/search/beer?pageLength=400</loc>
+    <lastmod>2017-06-18T07:57:31+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>http://comparesupermarketprices.co.uk/Supermarkets/search/heinz?pageLength=500</loc>
+    <lastmod>2017-06-18T07:57:31+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>http://comparesupermarketprices.co.uk/Supermarkets/search/Coffee?pageLength=400</loc>
+    <lastmod>2017-06-18T07:57:31+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>http://comparesupermarketprices.co.uk/Supermarkets/search/Coffee?pageLength=400</loc>
+    <lastmod>2017-06-18T07:57:31+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.00</priority>
+  </url> 
+ <url>
+    <loc>http://comparesupermarketprices.co.uk/Supermarkets/search/Tesco?pageLength=1500</loc>
+    <lastmod>2017-06-18T07:57:31+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.00</priority>
+  </url>  
+<url>
+    <loc>http://comparesupermarketprices.co.uk/Supermarkets/search/Asda?pageLength=1500</loc>
+    <lastmod>2017-06-18T07:57:31+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.00</priority>
+  </url>
+<url>
+    <loc>http://comparesupermarketprices.co.uk/Supermarkets/search/Sainsbury?pageLength=1500</loc>
     <lastmod>2017-06-18T07:57:31+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.00</priority>
