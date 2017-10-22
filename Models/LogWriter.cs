@@ -18,7 +18,7 @@ namespace youtube.Models
         }
         public void LogWrite(string logMessage)
         {
-            m_exePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            m_exePath = @"c:\logs";
             try
             {
                 using (StreamWriter w = File.AppendText(m_exePath + "\\" + "log.txt"))
@@ -38,9 +38,9 @@ namespace youtube.Models
                 txtWriter.Write("\r\nLog Entry : ");
                 txtWriter.WriteLine("{0} {1}", DateTime.Now.ToLongTimeString(),
                     DateTime.Now.ToLongDateString());
-                txtWriter.WriteLine("  :");
+            //    txtWriter.WriteLine("  :");
                 txtWriter.WriteLine("  :{0}", logMessage);
-                txtWriter.WriteLine("-------------------------------");
+            ///    txtWriter.WriteLine("-------------------------------");
             }
             catch (Exception ex)
             {

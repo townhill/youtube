@@ -52,7 +52,7 @@ ViewBag.search = search;
             var searchTerm = Request.Form.GetValues("search[value]").FirstOrDefault();
             // Trim off any spaces fro the end and remove common words like ' and ' , ' or ' , etc
           //  searchTerm = searchTerm.Replace("and"," ").Replace(""," ").Replace("&"," ").Trim();
-     //Models.LogWriter log = new Models.LogWriter(searchTerm);
+
 
             string[] searchTermSplit = searchTerm.Split(' ');
 
@@ -108,6 +108,8 @@ ViewBag.search = search;
 
 
                 recordsTotal = v.Count();
+
+                Models.LogWriter log = new Models.LogWriter(searchTerm + "   Returns " + recordsTotal.ToString());
                 var data = v.Skip(skip).Take(pageSize).ToList();
                 //   data.Add(Google);
                 return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data },
