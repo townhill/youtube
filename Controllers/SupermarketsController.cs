@@ -32,7 +32,9 @@ ViewBag.search = search;
 
         public ActionResult LoadCSP_auto(string search)
         {
-            var Paddy = RouteData.Values["search"];
+       
+
+          //  var Paddy = RouteData.Values["search"];
             //jQuery DataTables Param
             var draw = Request.Form.GetValues("draw").FirstOrDefault();
             //Find paging info
@@ -48,6 +50,10 @@ ViewBag.search = search;
 
             // Reads the built in search
             var searchTerm = Request.Form.GetValues("search[value]").FirstOrDefault();
+            // Trim off any spaces fro the end and remove common words like ' and ' , ' or ' , etc
+          //  searchTerm = searchTerm.Replace("and"," ").Replace(""," ").Replace("&"," ").Trim();
+     //Models.LogWriter log = new Models.LogWriter(searchTerm);
+
             string[] searchTermSplit = searchTerm.Split(' ');
 
             var tmpSearchTerm = " " + searchTerm;
@@ -75,7 +81,7 @@ ViewBag.search = search;
                             //
                             // #2nd try
                             //
-                            v = v.Where(a => a.Description.Contains(searchTerm));
+                            v = v.Where(a => a.Description.Contains(searchTerm) || a.Offers.Contains(searchTerm) || a.Section.Contains(searchTerm));
                         }
                         else
                             v = tmp;
