@@ -48,4 +48,3 @@ C:\Users\chris\Documents\Visual Studio 2017\Projects\youtube\bin\System.Diagnost
 C:\Users\chris\Documents\Visual Studio 2017\Projects\youtube\bin\Microsoft.AspNet.TelemetryCorrelation.xml
 C:\Users\chris\Documents\Visual Studio 2017\Projects\youtube\bin\System.Diagnostics.DiagnosticSource.xml
 C:\Users\chris\Documents\Visual Studio 2017\Projects\youtube\bin\System.Data.SqlClient.dll
-C:\Users\chris\Documents\Visual Studio 2017\Projects\youtube\obj\Debug\youtube.csprojResolveAssemblyReference.cache
