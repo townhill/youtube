@@ -5,21 +5,23 @@ using System.Web;
 using System.Web.Mvc;
 using System.Linq.Dynamic;
 using System.Data.Linq.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace youtube.Controllers
 {
+
     public class SupermarketsController : Controller
     {
         // GET: Supermarkets
         public ActionResult Search(string search)
         {
-            
-            if (string.IsNullOrEmpty(search))
-                search = "Stella";
+            //  Removed default search 25/10/17
+            //if (string.IsNullOrEmpty(search))
+            //    search = "Stella";
             var pageLength = Request.QueryString["pageLength"];
             if (string.IsNullOrEmpty(pageLength))
-                pageLength = "10";
-ViewBag.search = search;
+                pageLength = "25";
+            ViewBag.search = search;
             ViewBag.pageLength = pageLength;
             return View();
         }
@@ -32,8 +34,6 @@ ViewBag.search = search;
 
         public ActionResult LoadCSP_auto(string search)
         {
-       
-
           //  var Paddy = RouteData.Values["search"];
             //jQuery DataTables Param
             var draw = Request.Form.GetValues("draw").FirstOrDefault();
@@ -50,14 +50,17 @@ ViewBag.search = search;
 
             // Reads the built in search
             var searchTerm = Request.Form.GetValues("search[value]").FirstOrDefault();
-            // Trim off any spaces fro the end and remove common words like ' and ' , ' or ' , etc
-          //  searchTerm = searchTerm.Replace("and"," ").Replace(""," ").Replace("&"," ").Trim();
+   // Trim off any spaces fro the end and remove common words like ' and ' , ' or ' , etc
+            var modifiedSearch = searchTerm.Replace(" and ", " ").Replace("&", "").Replace(" or ", " ").Replace(",", " ").Replace(".", " ");
 
+            // Replace multiple spaces with just one
+            RegexOptions options = RegexOptions.None;
+            Regex regex = new Regex("[ ]{2,}", options);
+            modifiedSearch = regex.Replace(modifiedSearch, " ");
 
-            string[] searchTermSplit = searchTerm.Split(' ');
-
+            string[] searchTermSplit = modifiedSearch.Split(' ');
             var tmpSearchTerm = " " + searchTerm;
-
+            Models.LogWriter log = new Models.LogWriter(searchTerm + "   Returns " + "Here!");
             int pageSize = length != null ? Convert.ToInt32(length) : 0;
             int skip = start != null ? Convert.ToInt16(start) : 0;
             int recordsTotal = 0;
@@ -87,14 +90,21 @@ ViewBag.search = search;
                             v = tmp;
                     }
                 }
-                else
+                else if (searchTermSplit.Count() == 2)
                 {
                     string s1 = searchTermSplit[0];
                     string s2 = searchTermSplit[1];
-                    tmp = tmp.Where(a => a.Description.Contains(s1) && a.Description.Contains(s2));
+                    tmp = tmp.Where( a => (a.Description.Contains(s1) && a.Description.Contains(s2)) || (a.Section.Contains(s1) && a.Section.Contains(s2)));
                     v = tmp;
                 }
-
+                else // search contains three words
+                {
+                    string s1 = searchTermSplit[0];
+                    string s2 = searchTermSplit[1];
+                    string s3 = searchTermSplit[2];
+                    tmp = tmp.Where(a => (a.Description.Contains(s1) && a.Description.Contains(s2) && a.Description.Contains(s3)) || (a.Section.Contains(s1) && a.Section.Contains(s2) && a.Section.Contains(s3)));
+                    v = tmp;
+                }
 
                 //SORTING...  (For sorting we need to add a reference System.Linq.Dynamic)
                 if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDir)))
@@ -109,7 +119,7 @@ ViewBag.search = search;
 
                 recordsTotal = v.Count();
 
-                Models.LogWriter log = new Models.LogWriter(searchTerm + "   Returns " + recordsTotal.ToString());
+                Models.LogWriter logDebug = new Models.LogWriter(searchTerm + "   Returns " + recordsTotal.ToString());
                 var data = v.Skip(skip).Take(pageSize).ToList();
                 //   data.Add(Google);
                 return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data },

@@ -94,7 +94,11 @@
                     { "data": "Supermarket", "autoWidth": true },
                     { "data": "Price", "autoWidth": true },
                     { "data": "Offers", "autoWidth": true },
-                    { "data": "Section", "autoWidth": true },
+                  //  { "data": "Section", "autoWidth": true },
+                   // { "data": "Section", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="search/' + data + '">' + data + '</a>'; } }
+                 //   { "data": "Section", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://localhost:37711/supermarkets/search/' + data + '">' + data + '</a>'; } }
+                     { "data": "Section", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://christownhill.com/supermarkets/search/' + data + '">' + data + '</a>'; } }
+
                     //{ "data": "Shelf", "autoWidth": true }
                 ],
                 "pageLength": @ViewBag.pageLength,
@@ -103,8 +107,9 @@
                     "search": '@ViewBag.search'
                 }
             });
-            $('div.dataTables_filter input').focus();
 
+            $('div.dataTables_filter input').focus();
+            $('div.dataTables_filter input').attr("placeholder","Search...");
 
         });
     </script>
