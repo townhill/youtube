@@ -14,7 +14,7 @@ namespace youtube.Controllers
     {
  string[] keyWords = new string[] { @"Chicken","Whisky","Christmas","Pork","Heinz","Tassimo","Lamb","Merlot","Chardonnay","Pinot","Beef","Turkey","Pasta",
                                     "Alpro","Coffee","Cigarettes","Soup","Actimel","Yoghurt","Weetabix","Cereal","Biscuit","Bread","Birthday","Milk",
-                                    "Gin", "Brandy", "Butter","Vodka","Dog","Cat","Garlic","McCain","Chocolate","Sugar","Mince","Bleach" };
+                                    "Gin", "Brandy", "Butter","Vodka","Dog","Cat","Garlic","McCain","Chocolate","Sugar","Mince","Bleach", "Bitter","Lager" };
 
 
         // GET: Supermarkets
@@ -56,7 +56,7 @@ namespace youtube.Controllers
             // Reads the built in search
             var searchTerm = Request.Form.GetValues("search[value]").FirstOrDefault();
             // Trim off any spaces fro the end and remove common words like ' and ' , ' or ' , etc
-            var modifiedSearch = searchTerm.Replace(" and ", " ").Replace("&", "").Replace(" or ", " ").Replace(",", " ").Replace(".", " ").Replace("the ", "");
+            var modifiedSearch = searchTerm.Replace(" and ", " ").Replace("&", "").Replace(" or ", " ").Replace(",", " ").Replace(".", " ").Replace("the ", "").Replace("-","");
 
             // Replace multiple spaces with just one
             RegexOptions options = RegexOptions.None;
@@ -65,7 +65,7 @@ namespace youtube.Controllers
 
             string[] searchTermSplit = modifiedSearch.Split(' ');
             var tmpSearchTerm = " " + searchTerm;
-            Models.LogWriter log = new Models.LogWriter(searchTerm);
+
             int pageSize = length != null ? Convert.ToInt32(length) : 0;
             int skip = start != null ? Convert.ToInt16(start) : 0;
             int recordsTotal = 0;
@@ -149,6 +149,10 @@ namespace youtube.Controllers
                         }
                     }
                 }
+                //
+                //  Log the search
+                //
+                Models.LogWriter log = new Models.LogWriter(searchTerm + " " + recordsTotal.ToString());
                 return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data },
                     JsonRequestBehavior.AllowGet);
             }

@@ -83,13 +83,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/28/2017 08:15:02</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/28/2017 08:15:00</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.Scripting.dll">
       <publishTime>07/28/2017 08:15:02</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/28/2017 08:15:00</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.Scripting.dll">
       <publishTime>07/28/2017 08:15:02</publishTime>
@@ -101,10 +101,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/28/2017 08:15:02</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/28/2017 08:15:00</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/28/2017 08:15:00</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
       <publishTime>07/28/2017 08:15:02</publishTime>
@@ -239,10 +239,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/23/2014 13:57:34</publishTime>
     </File>
     <File Include="bin/youtube.dll">
-      <publishTime>10/26/2017 11:18:49</publishTime>
+      <publishTime>10/26/2017 16:59:49</publishTime>
     </File>
     <File Include="bin/youtube.pdb">
-      <publishTime>10/26/2017 11:18:49</publishTime>
+      <publishTime>10/26/2017 16:59:49</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.css">
       <publishTime>10/10/2017 08:57:53</publishTime>
