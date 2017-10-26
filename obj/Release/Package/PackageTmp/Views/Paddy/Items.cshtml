@@ -1,0 +1,46 @@
+﻿
+
+@{
+    ViewBag.Title = "Paddy Server Side";
+}
+
+<h2>Paddy</h2>
+<div style="width:90%" ;margin:0 auto;">
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Supermarket</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@* Load css *@
+<link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+@section Scripts{
+    <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "filter": false,
+                "orderMulti": false,
+
+                "ajax": {
+                    url: '/Paddy/LoadItems',
+                    type: 'POST',
+                    datatype: 'json'
+                },
+                "columns": [
+                    { "data": "Description", "autoWidth": true },
+                    { "data": "Supermarket", "autoWidth": true },
+                    { "data": "Price", "autoWidth": true }
+                ]
+            });
+        });
+    </script>
+}

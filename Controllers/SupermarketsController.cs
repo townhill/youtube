@@ -14,7 +14,7 @@ namespace youtube.Controllers
     {
  string[] keyWords = new string[] { @"Chicken","Whisky","Christmas","Pork","Heinz","Tassimo","Lamb","Merlot","Chardonnay","Pinot","Beef","Turkey","Pasta",
                                     "Alpro","Coffee","Cigarettes","Soup","Actimel","Yoghurt","Weetabix","Cereal","Biscuit","Bread","Birthday","Milk",
-                                    "Gin", "Brandy", "Butter","Vodka","Dog","Cat" };
+                                    "Gin", "Brandy", "Butter","Vodka","Dog","Cat","Garlic","McCain","Chocolate","Sugar","Mince","Bleach" };
 
 
         // GET: Supermarkets
@@ -39,7 +39,7 @@ namespace youtube.Controllers
 
         public ActionResult LoadCSP_auto(string search)
         {
-          //  var Paddy = RouteData.Values["search"];
+            //  var Paddy = RouteData.Values["search"];
             //jQuery DataTables Param
             var draw = Request.Form.GetValues("draw").FirstOrDefault();
             //Find paging info
@@ -55,8 +55,8 @@ namespace youtube.Controllers
 
             // Reads the built in search
             var searchTerm = Request.Form.GetValues("search[value]").FirstOrDefault();
-   // Trim off any spaces fro the end and remove common words like ' and ' , ' or ' , etc
-            var modifiedSearch = searchTerm.Replace(" and ", " ").Replace("&", "").Replace(" or ", " ").Replace(",", " ").Replace(".", " ");
+            // Trim off any spaces fro the end and remove common words like ' and ' , ' or ' , etc
+            var modifiedSearch = searchTerm.Replace(" and ", " ").Replace("&", "").Replace(" or ", " ").Replace(",", " ").Replace(".", " ").Replace("the ", "");
 
             // Replace multiple spaces with just one
             RegexOptions options = RegexOptions.None;
@@ -65,7 +65,7 @@ namespace youtube.Controllers
 
             string[] searchTermSplit = modifiedSearch.Split(' ');
             var tmpSearchTerm = " " + searchTerm;
-            Models.LogWriter log = new Models.LogWriter(searchTerm + "   Returns " + "Here!");
+            Models.LogWriter log = new Models.LogWriter(searchTerm);
             int pageSize = length != null ? Convert.ToInt32(length) : 0;
             int skip = start != null ? Convert.ToInt16(start) : 0;
             int recordsTotal = 0;
@@ -99,7 +99,7 @@ namespace youtube.Controllers
                 {
                     string s1 = searchTermSplit[0];
                     string s2 = searchTermSplit[1];
-                    tmp = tmp.Where( a => (a.Description.Contains(s1) && a.Description.Contains(s2)) || (a.Section.Contains(s1) && a.Section.Contains(s2) || (a.Offers.Contains(s1) && a.Offers.Contains(s2))));
+                    tmp = tmp.Where(a => (a.Description.Contains(s1) && a.Description.Contains(s2)) || (a.Section.Contains(s1) && a.Section.Contains(s2) || (a.Offers.Contains(s1) && a.Offers.Contains(s2))));
                     v = tmp;
                 }
                 else // search contains three words
@@ -114,33 +114,43 @@ namespace youtube.Controllers
                 //SORTING...  (For sorting we need to add a reference System.Linq.Dynamic)
                 if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDir)))
                 {
+                    if (sortColumn == "Price")
+                        sortColumn = "iPrice";
                     v = v.OrderBy(sortColumn + " " + sortColumnDir);
                 }
 
                 recordsTotal = v.Count();
 
-                Models.LogWriter logDebug = new Models.LogWriter(searchTerm + "   Returns " + recordsTotal.ToString());
+                // Just get the data we need
                 var data = v.Skip(skip).Take(pageSize).ToList();
 
                 //  Transform some columns and keyworkds into hyperlinks
                 foreach (var rec in data)
                 {
-                              rec.Supermarket = string.Format("<a href='#'>{0}</a>", rec.Supermarket);
-                    rec.Price = string.Format("£{0}", rec.iPrice.ToString());
+                    //rec.Supermarket = string.Format("<a href='http://christownhill.com/supermarkets/search/{0}'>{0}</a>", rec.Supermarket);
+                    rec.Supermarket = string.Format("<a href='http://comparesupermarketprices.co.uk/supermarkets/search/{0}'>{0}</a>", rec.Supermarket);
+                    rec.Price = string.Format("{0:C}", rec.iPrice);
                     foreach (string keyword in keyWords)
                     {
                         var tmpStr = string.Format(" {0} ", keyword);
                         if (rec.Description.Contains(tmpStr))
                         {
-                            rec.Description = rec.Description.Replace(tmpStr, string.Format("<a href='http://christownhill.com/supermarkets/search/{0}'>{1}</a>", keyword,tmpStr));
+                            //rec.Description = rec.Description.Replace(tmpStr, string.Format("<a href='http://christownhill.com/supermarkets/search/{0}'>{1}</a>", keyword, tmpStr));
+                            rec.Description = rec.Description.Replace(tmpStr, string.Format("<a href='http://comparesupermarketprices.co.uk/supermarkets/search/{0}'>{1}</a>", keyword, tmpStr));
+                        }
+                        else
+                        {
+                            var tmpStrSecond = string.Format("{0} ", keyword);
+                            if (rec.Description.Contains(tmpStrSecond))
+                            {
+                                //rec.Description = rec.Description.Replace(tmpStr, string.Format("<a href='http://christownhill.com/supermarkets/search/{0}'>{1}</a>", keyword, tmpStr));
+                                rec.Description = rec.Description.Replace(tmpStrSecond, string.Format("<a href='http://comparesupermarketprices.co.uk/supermarkets/search/{0}'>{1}</a>", keyword, tmpStrSecond));
+                            }
                         }
                     }
                 }
-
-            
                 return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data },
                     JsonRequestBehavior.AllowGet);
-
             }
         }
 

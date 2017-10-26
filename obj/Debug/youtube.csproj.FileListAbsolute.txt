@@ -46,5 +46,6 @@ C:\Users\chris\Documents\Visual Studio 2017\Projects\youtube\bin\System.Web.Razo
 C:\Users\chris\Documents\Visual Studio 2017\Projects\youtube\bin\System.Web.WebPages.xml
 C:\Users\chris\Documents\Visual Studio 2017\Projects\youtube\bin\System.Web.WebPages.Deployment.xml
 C:\Users\chris\Documents\Visual Studio 2017\Projects\youtube\bin\System.Web.WebPages.Razor.xml
+C:\Users\chris\Documents\Visual Studio 2017\Projects\youtube\obj\Debug\youtube.csprojResolveAssemblyReference.cache
 C:\Users\chris\Documents\Visual Studio 2017\Projects\youtube\obj\Debug\youtube.dll
 C:\Users\chris\Documents\Visual Studio 2017\Projects\youtube\obj\Debug\youtube.pdb
