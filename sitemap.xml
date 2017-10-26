@@ -114,5 +114,23 @@
     <changefreq>daily</changefreq>
     <priority>1.00</priority>
   </url>
+  <url>
+    <loc>http://comparesupermarketprices.co.uk/Supermarkets/search/Soreen?pageLength=100</loc>
+    <lastmod>2017-06-18T07:57:31+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>http://comparesupermarketprices.co.uk/Supermarkets/search/Whisky?pageLength=100</loc>
+    <lastmod>2017-06-18T07:57:31+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>http://comparesupermarketprices.co.uk/Supermarkets/search/Brandy?pageLength=100</loc>
+    <lastmod>2017-06-18T07:57:31+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.00</priority>
+  </url>
 </urlset>
 

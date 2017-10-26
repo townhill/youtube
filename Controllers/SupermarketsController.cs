@@ -9,9 +9,14 @@ using System.Text.RegularExpressions;
 
 namespace youtube.Controllers
 {
-
+   
     public class SupermarketsController : Controller
     {
+ string[] keyWords = new string[] { @"Chicken","Whisky","Christmas","Pork","Heinz","Tassimo","Lamb","Merlot","Chardonnay","Pinot","Beef","Turkey","Pasta",
+                                    "Alpro","Coffee","Cigarettes","Soup","Actimel","Yoghurt","Weetabix","Cereal","Biscuit","Bread","Birthday","Milk",
+                                    "Gin", "Brandy", "Butter","Vodka","Dog","Cat" };
+
+
         // GET: Supermarkets
         public ActionResult Search(string search)
         {
@@ -78,13 +83,13 @@ namespace youtube.Controllers
                         //
                         // #1st try
                         //
-                        tmp = tmp.Where(a => a.Description.Contains(tmpSearchTerm) || a.Description.StartsWith(searchTerm));
+                        tmp = tmp.Where(a => a.Description.Contains(tmpSearchTerm) || a.Description.StartsWith(searchTerm) || a.Supermarket.Contains(searchTerm));
                         if (tmp.Count() == 0)
                         {
                             //
                             // #2nd try
                             //
-                            v = v.Where(a => a.Description.Contains(searchTerm) || a.Offers.Contains(searchTerm) || a.Section.Contains(searchTerm));
+                            v = v.Where(a => a.Description.Contains(searchTerm) || a.Supermarket.Contains(searchTerm) || a.Offers.Contains(searchTerm) || a.Section.Contains(searchTerm) || a.Offers.Contains(searchTerm));
                         }
                         else
                             v = tmp;
@@ -94,7 +99,7 @@ namespace youtube.Controllers
                 {
                     string s1 = searchTermSplit[0];
                     string s2 = searchTermSplit[1];
-                    tmp = tmp.Where( a => (a.Description.Contains(s1) && a.Description.Contains(s2)) || (a.Section.Contains(s1) && a.Section.Contains(s2)));
+                    tmp = tmp.Where( a => (a.Description.Contains(s1) && a.Description.Contains(s2)) || (a.Section.Contains(s1) && a.Section.Contains(s2) || (a.Offers.Contains(s1) && a.Offers.Contains(s2))));
                     v = tmp;
                 }
                 else // search contains three words
@@ -102,7 +107,7 @@ namespace youtube.Controllers
                     string s1 = searchTermSplit[0];
                     string s2 = searchTermSplit[1];
                     string s3 = searchTermSplit[2];
-                    tmp = tmp.Where(a => (a.Description.Contains(s1) && a.Description.Contains(s2) && a.Description.Contains(s3)) || (a.Section.Contains(s1) && a.Section.Contains(s2) && a.Section.Contains(s3)));
+                    tmp = tmp.Where(a => (a.Description.Contains(s1) && a.Description.Contains(s2) && a.Description.Contains(s3)) || (a.Section.Contains(s1) && a.Section.Contains(s2) && a.Section.Contains(s3) || (a.Offers.Contains(s1) && a.Offers.Contains(s2) && a.Offers.Contains(s3))));
                     v = tmp;
                 }
 
@@ -112,16 +117,27 @@ namespace youtube.Controllers
                     v = v.OrderBy(sortColumn + " " + sortColumnDir);
                 }
 
-                //youtube.Item Google = new youtube.Item();
-                //Google.Description = "test";
-
-
-
                 recordsTotal = v.Count();
 
                 Models.LogWriter logDebug = new Models.LogWriter(searchTerm + "   Returns " + recordsTotal.ToString());
                 var data = v.Skip(skip).Take(pageSize).ToList();
-                //   data.Add(Google);
+
+                //  Transform some columns and keyworkds into hyperlinks
+                foreach (var rec in data)
+                {
+                              rec.Supermarket = string.Format("<a href='#'>{0}</a>", rec.Supermarket);
+                    rec.Price = string.Format("£{0}", rec.iPrice.ToString());
+                    foreach (string keyword in keyWords)
+                    {
+                        var tmpStr = string.Format(" {0} ", keyword);
+                        if (rec.Description.Contains(tmpStr))
+                        {
+                            rec.Description = rec.Description.Replace(tmpStr, string.Format("<a href='http://christownhill.com/supermarkets/search/{0}'>{1}</a>", keyword,tmpStr));
+                        }
+                    }
+                }
+
+            
                 return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data },
                     JsonRequestBehavior.AllowGet);
 
