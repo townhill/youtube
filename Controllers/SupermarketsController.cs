@@ -56,7 +56,7 @@ namespace youtube.Controllers
             // Reads the built in search
             var searchTerm = Request.Form.GetValues("search[value]").FirstOrDefault();
             // Trim off any spaces fro the end and remove common words like ' and ' , ' or ' , etc
-            var modifiedSearch = searchTerm.Replace(" and ", " ").Replace("&", "").Replace(" or ", " ").Replace(",", " ").Replace(".", " ").Replace("the ", "").Replace("-","");
+            var modifiedSearch = searchTerm.Replace(" and ", " ").Replace("&", "").Replace(" or ", " ").Replace(",", " ").Replace(".", " ").Replace("the ", "").Replace("-","").Replace("'","");
 
             // Replace multiple spaces with just one
             RegexOptions options = RegexOptions.None;
@@ -83,13 +83,13 @@ namespace youtube.Controllers
                         //
                         // #1st try
                         //
-                        tmp = tmp.Where(a => a.Description.Contains(tmpSearchTerm) || a.Description.StartsWith(searchTerm) || a.Supermarket.Contains(searchTerm));
+                        tmp = tmp.Where(a => a.Description.Contains(tmpSearchTerm) || a.Description.StartsWith(modifiedSearch) || a.Supermarket.Contains(modifiedSearch));
                         if (tmp.Count() == 0)
                         {
                             //
                             // #2nd try
                             //
-                            v = v.Where(a => a.Description.Contains(searchTerm) || a.Supermarket.Contains(searchTerm) || a.Offers.Contains(searchTerm) || a.Section.Contains(searchTerm) || a.Offers.Contains(searchTerm));
+                            v = v.Where(a => a.Description.Contains(modifiedSearch) || a.Supermarket.Contains(modifiedSearch) || a.Offers.Contains(modifiedSearch) || a.Section.Contains(modifiedSearch) || a.Offers.Contains(modifiedSearch));
                         }
                         else
                             v = tmp;
