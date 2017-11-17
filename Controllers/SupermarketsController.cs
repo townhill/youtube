@@ -20,6 +20,11 @@ namespace youtube.Controllers
         // GET: Supermarkets
         public ActionResult Search(string search)
         {
+            // Nov 16th 2017 - check to see if we're clicked a brand link
+            var brand = Request.QueryString["brand"];
+            if (!string.IsNullOrEmpty(brand))
+                ViewBag.brand = "true";
+            
             //  Removed default search 25/10/17
             //if (string.IsNullOrEmpty(search))
             //    search = "Stella";
