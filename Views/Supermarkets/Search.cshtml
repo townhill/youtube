@@ -4,7 +4,7 @@
 }
 <link href="~/Content/Site.css" rel="stylesheet" />
 @* jQuery DataTables *@
-<br />
+<br /><input id="brand" type="hidden" value="@ViewBag.brand" /><input id="section" type="hidden" value="@ViewBag.section" />
 <div class="container" style="margin-bottom: 4px">
     <div class="rows">
         <div>
@@ -87,7 +87,14 @@
                 "ajax": {
                     "url": "/Supermarkets/LoadCSP_auto",
                     "type": "POST",
-                    "datatype": "json"
+                    "datatype": "json",
+                    @*"data": {
+                        "brand": '@ViewBag.search'
+                    }*@
+                    "data": function (d) {
+                        d.brand = $('#brand').val();
+                    }
+
                 },
                 "columns": [
                     { "data": "Description", "autoWidth": true },
@@ -95,7 +102,12 @@
                 //    { "data": "Supermarket", "render": function (data, type, full, meta) { return '<a href="http://christownhill.com/supermarkets/search/' + data + '">' + data + '</a>'; } }
 
                     { "data": "Price", "autoWidth": true },
-                    { "data": "Section", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://comparesupermarketprices.co.uk/supermarkets/search/' + data + '">' + data + '</a>'; } },
+
+                 //   { "data": "Section", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://comparesupermarketprices.co.uk/supermarkets/search/' + data + '">' + data + '</a>'; } },
+                    { "data": "Section", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://localhost:37711/Supermarkets/search/' + data + '?section=true">' + data + '</a>'; } },
+
+
+
 //                    { "data": "Brand", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://comparesupermarketprices.co.uk/supermarkets/brand/' + data + '">' + data + '</a>'; } },
                     { "data": "Brand", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://localhost:37711/Supermarkets/search/' + data + '?brand=true">' + data + '</a>'; } },
 

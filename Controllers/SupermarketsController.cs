@@ -24,7 +24,15 @@ namespace youtube.Controllers
             var brand = Request.QueryString["brand"];
             if (!string.IsNullOrEmpty(brand))
                 ViewBag.brand = "true";
-            
+            else
+                ViewBag.brand = "false";
+            // Also added a section
+            var section = Request.QueryString["section"];
+            if (!string.IsNullOrEmpty(section))
+                ViewBag.section = "true";
+            else
+                ViewBag.section = "false";
+
             //  Removed default search 25/10/17
             //if (string.IsNullOrEmpty(search))
             //    search = "Stella";
@@ -44,25 +52,27 @@ namespace youtube.Controllers
 
         public ActionResult LoadCSP_auto(string search)
         {
-            //  var Paddy = RouteData.Values["search"];
+            //
+            //  Check to see if we're searching for a brand
+            //
+            var Brand = Request.Form.GetValues("brand").FirstOrDefault();
+
             //jQuery DataTables Param
             var draw = Request.Form.GetValues("draw").FirstOrDefault();
             //Find paging info
             var start = Request.Form.GetValues("start").FirstOrDefault();
             var length = Request.Form.GetValues("length").FirstOrDefault();
-            //Find order columns info
+            //
+            //  Get the ORDER columns info
+            //
             var sortColumn = Request.Form.GetValues("columns[" + Request.Form.GetValues("order[0][column]").FirstOrDefault()
                                     + "][data]").FirstOrDefault();
             var sortColumnDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
-            //find search columns info
-            //var description = Request.Form.GetValues("columns[0][search][value]").FirstOrDefault();
-            //var Supermarket = Request.Form.GetValues("columns[1][search][value]").FirstOrDefault();
 
             // Reads the built in search
             var searchTerm = Request.Form.GetValues("search[value]").FirstOrDefault();
             // Trim off any spaces fro the end and remove common words like ' and ' , ' or ' , etc
             var modifiedSearch = searchTerm.Replace(" and ", " ").Replace("&", "").Replace(" or ", " ").Replace(",", " ").Replace(".", " ").Replace("the ", "").Replace("-","").Replace("'","");
-
             // Replace multiple spaces with just one
             RegexOptions options = RegexOptions.None;
             Regex regex = new Regex("[ ]{2,}", options);
@@ -80,8 +90,14 @@ namespace youtube.Controllers
                 // dc.Configuration.LazyLoadingEnabled = false; // if your table is relational, contain foreign key
                 var v = (from a in dc.Items select a);
                 var tmp = (from a in dc.Items select a);
+                //
                 //SEARCHING...
-                if (searchTermSplit.Count() == 1)
+                //
+                if(Brand == "true") {
+                    tmp = tmp.Where(a => a.Brand.StartsWith(searchTerm));
+                    v = tmp;
+                }
+                else if (searchTermSplit.Count() == 1)
                 {
                     if (!string.IsNullOrEmpty(searchTermSplit[0]))
                     {
