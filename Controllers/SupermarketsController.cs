@@ -53,9 +53,10 @@ namespace youtube.Controllers
         public ActionResult LoadCSP_auto(string search)
         {
             //
-            //  Check to see if we're searching for a brand
+            //  Check to see if we're searching for a brand or a section
             //
             var Brand = Request.Form.GetValues("brand").FirstOrDefault();
+            var Section = Request.Form.GetValues("section").FirstOrDefault();
 
             //jQuery DataTables Param
             var draw = Request.Form.GetValues("draw").FirstOrDefault();
@@ -95,6 +96,10 @@ namespace youtube.Controllers
                 //
                 if(Brand == "true") {
                     tmp = tmp.Where(a => a.Brand.StartsWith(searchTerm));
+                    v = tmp;
+                }
+                {
+                    tmp = tmp.Where(a => a.Section.StartsWith(searchTerm));
                     v = tmp;
                 }
                 else if (searchTermSplit.Count() == 1)
