@@ -109,6 +109,7 @@ namespace youtube.Controllers
                 {
                     if (!string.IsNullOrEmpty(Section))
                     {
+                        searchTerm = searchTerm.Replace("and", "&");
                         tmp = tmp.Where(a => a.Section.StartsWith(searchTerm));
                         v = tmp;
                     }
@@ -120,7 +121,7 @@ namespace youtube.Controllers
                         //
                         // #1st try
                         //
-                        tmp = tmp.Where(a => a.Description.Contains(tmpSearchTerm) || a.Description.StartsWith(modifiedSearch) || a.Supermarket.Contains(modifiedSearch));
+                        tmp = tmp.Where(a => a.Description.Contains(tmpSearchTerm) || a.Description.StartsWith(modifiedSearch) || a.Supermarket.Contains(modifiedSearch) || a.Section.Equals(modifiedSearch));
                         if (tmp.Count() == 0)
                         {
                             //
