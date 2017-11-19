@@ -23,15 +23,15 @@ namespace youtube.Controllers
             // Nov 16th 2017 - check to see if we're clicked a brand link
             var brand = Request.QueryString["brand"];
             if (!string.IsNullOrEmpty(brand))
-                ViewBag.brand = "true";
+                ViewBag.brand = brand;
             else
-                ViewBag.brand = "false";
+                ViewBag.brand = "";
             // Also added a section
             var section = Request.QueryString["section"];
             if (!string.IsNullOrEmpty(section))
-                ViewBag.section = "true";
+                ViewBag.section = section;
             else
-                ViewBag.section = "false";
+                ViewBag.section = "";
 
             //  Removed default search 25/10/17
             //if (string.IsNullOrEmpty(search))
@@ -94,13 +94,24 @@ namespace youtube.Controllers
                 //
                 //SEARCHING...
                 //
-                if(Brand == "true") {
-                    tmp = tmp.Where(a => a.Brand.StartsWith(searchTerm));
-                    v = tmp;
-                }
+                if (searchTerm == Brand)
                 {
-                    tmp = tmp.Where(a => a.Section.StartsWith(searchTerm));
-                    v = tmp;
+                    if (!string.IsNullOrEmpty(Brand))
+                    {
+                        // Check t see if we did click a brand hyperlink but are now just using the normal search
+
+                        tmp = tmp.Where(a => a.Brand.StartsWith(searchTerm));
+                        v = tmp;
+
+                    }
+                }
+                else if (searchTerm == Section)
+                {
+                    if (!string.IsNullOrEmpty(Section))
+                    {
+                        tmp = tmp.Where(a => a.Section.StartsWith(searchTerm));
+                        v = tmp;
+                    }
                 }
                 else if (searchTermSplit.Count() == 1)
                 {

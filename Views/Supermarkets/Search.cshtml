@@ -104,13 +104,13 @@
 
                     { "data": "Price", "autoWidth": true },
 
-                 //   { "data": "Section", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://comparesupermarketprices.co.uk/supermarkets/search/' + data + '">' + data + '</a>'; } },
-                    { "data": "Section", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://localhost:37711/Supermarkets/search/' + data + '?section=true">' + data + '</a>'; } },
+                    { "data": "Section", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://comparesupermarketprices.co.uk/supermarkets/search/' + data + '?section=' + data + '">' + data + '</a>'; } },
+                //    { "data": "Section", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://localhost:37711/Supermarkets/search/' + data + '?section=' + data + '">' + data + '</a>'; } },
 
 
 
-//                    { "data": "Brand", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://comparesupermarketprices.co.uk/supermarkets/brand/' + data + '">' + data + '</a>'; } },
-                    { "data": "Brand", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://localhost:37711/Supermarkets/search/' + data + '?brand=true">' + data + '</a>'; } },
+                    { "data": "Brand", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://comparesupermarketprices.co.uk/supermarkets/brand/' + data + '?brand=' + data + '">' + data + '</a>'; } },
+             //       { "data": "Brand", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://localhost:37711/Supermarkets/search/' + data + '?brand=' + data + '">' + data + '</a>'; } },
 
                     // http://localhost:37711/Supermarkets/Search
                     { "data": "Offers", "autoWidth": true }
