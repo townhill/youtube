@@ -164,24 +164,24 @@ namespace youtube.Controllers
                 //  Transform some columns and keyworkds into hyperlinks
                 foreach (var rec in data)
                 {
-                    //rec.Supermarket = string.Format("<a href='http://christownhill.com/supermarkets/search/{0}'>{0}</a>", rec.Supermarket);
-                    rec.Supermarket = string.Format("<a href='http://comparesupermarketprices.co.uk/supermarkets/search/{0}'>{0}</a>", rec.Supermarket);
+                    rec.Supermarket = string.Format("<a href='http://christownhill.com/supermarkets/search/{0}'>{0}</a>", rec.Supermarket);
+                    //rec.Supermarket = string.Format("<a href='http://comparesupermarketprices.co.uk/supermarkets/search/{0}'>{0}</a>", rec.Supermarket);
                     rec.Price = string.Format("{0:C}", rec.iPrice);
                     foreach (string keyword in keyWords)
                     {
                         var tmpStr = string.Format(" {0} ", keyword);
                         if (rec.Description.Contains(tmpStr))
                         {
-                            //rec.Description = rec.Description.Replace(tmpStr, string.Format("<a href='http://christownhill.com/supermarkets/search/{0}'>{1}</a>", keyword, tmpStr));
-                            rec.Description = rec.Description.Replace(tmpStr, string.Format("<a href='http://comparesupermarketprices.co.uk/supermarkets/search/{0}'>{1}</a>", keyword, tmpStr));
+                            rec.Description = rec.Description.Replace(tmpStr, string.Format("<a href='http://christownhill.com/supermarkets/search/{0}'>{1}</a>", keyword, tmpStr));
+                            //rec.Description = rec.Description.Replace(tmpStr, string.Format("<a href='http://comparesupermarketprices.co.uk/supermarkets/search/{0}'>{1}</a>", keyword, tmpStr));
                         }
                         else
                         {
                             var tmpStrSecond = string.Format("{0} ", keyword);
                             if (rec.Description.Contains(tmpStrSecond))
                             {
-                                //rec.Description = rec.Description.Replace(tmpStr, string.Format("<a href='http://christownhill.com/supermarkets/search/{0}'>{1}</a>", keyword, tmpStr));
-                                rec.Description = rec.Description.Replace(tmpStrSecond, string.Format("<a href='http://comparesupermarketprices.co.uk/supermarkets/search/{0}'>{1}</a>", keyword, tmpStrSecond));
+                                rec.Description = rec.Description.Replace(tmpStr, string.Format("<a href='http://christownhill.com/supermarkets/search/{0}'>{1}</a>", keyword, tmpStr));
+                                //rec.Description = rec.Description.Replace(tmpStrSecond, string.Format("<a href='http://comparesupermarketprices.co.uk/supermarkets/search/{0}'>{1}</a>", keyword, tmpStrSecond));
                             }
                         }
                     }
