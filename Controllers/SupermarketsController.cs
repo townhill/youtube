@@ -49,7 +49,7 @@ namespace youtube.Controllers
             return View();
         }
 
-
+        [ValidateInput(false)]
         public ActionResult LoadCSP_auto(string search)
         {
             //
@@ -70,10 +70,14 @@ namespace youtube.Controllers
                                     + "][data]").FirstOrDefault();
             var sortColumnDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
 
-            // Reads the built in search
+            // Reads the built in search and decode
             var searchTerm = Request.Form.GetValues("search[value]").FirstOrDefault();
+            searchTerm = Server.HtmlDecode(searchTerm);
+
             // Trim off any spaces fro the end and remove common words like ' and ' , ' or ' , etc
-            var modifiedSearch = searchTerm.Replace(" and ", " ").Replace("&", "").Replace(" or ", " ").Replace(",", " ").Replace(".", " ").Replace("the ", "").Replace("-","").Replace("'","");
+           // var modifiedSearch = searchTerm.Replace(" and ", " ").Replace("&", "").Replace(" or ", " ").Replace(",", " ").Replace(".", " ").Replace("the ", "").Replace("-","").Replace("'","");
+            var modifiedSearch = searchTerm.Replace(" and ", " ").Replace(" or ", " ").Replace(",", " ").Replace(".", " ").Replace("the ", "").Replace("-", "");
+
             // Replace multiple spaces with just one
             RegexOptions options = RegexOptions.None;
             Regex regex = new Regex("[ ]{2,}", options);
@@ -99,7 +103,7 @@ namespace youtube.Controllers
                     if (!string.IsNullOrEmpty(Brand))
                     {
                         // Check t see if we did click a brand hyperlink but are now just using the normal search
-
+                        searchTerm = searchTerm.Replace("and", "&");
                         tmp = tmp.Where(a => a.Brand.StartsWith(searchTerm));
                         v = tmp;
 

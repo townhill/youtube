@@ -5,6 +5,7 @@
 <link href="~/Content/Site.css" rel="stylesheet" />
 @* jQuery DataTables *@
 <br /><input id="brand" type="hidden" value="@ViewBag.brand" /><input id="section" type="hidden" value="@ViewBag.section" />
+<input id="search" type="hidden" value="@Server.HtmlDecode(ViewBag.search)" />
 <div class="container" style="margin-bottom: 4px">
     <div class="rows">
         <div>
@@ -112,8 +113,9 @@
 
              //       { "data": "Brand", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://comparesupermarketprices.co.uk/supermarkets/brand/' + data + '?brand=' + data + '">' + data + '</a>'; } },
              //       { "data": "Brand", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://localhost:37711/Supermarkets/search/' + data + '?brand=' + data + '">' + data + '</a>'; } },
-        { "data": "Brand", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://christownhill.com/Supermarkets/search/' + data + '?brand=' + data + '">' + data + '</a>'; } },
-
+       // { "data": "Brand", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://christownhill.com/Supermarkets/search/' + data + '?brand=' + data + '">' + data + '</a>'; } },
+                    { "data": "Brand", "render": function (data, type, full, meta) { var myurl = encodeURIComponent(data); return '<a href="http://localhost:37711/Supermarkets/search/' + myurl + '?brand=' + myurl + '">' + data + '</a>'; } },
+                   
                     { "data": "Offers", "autoWidth": true }
                   //  { "data": "Section", "autoWidth": true },
                    // { "data": "Section", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="search/' + data + '">' + data + '</a>'; } }
@@ -125,7 +127,8 @@
                 "pageLength": @ViewBag.pageLength,
                 "lengthMenu": [[10, 25, 50], [10, 25, 50]],
                 "search": {
-                    "search": '@ViewBag.search'
+                    "search": $('#search').val()
+                    @*"search": '@ViewBag.search'*@
                 }
             });
 
