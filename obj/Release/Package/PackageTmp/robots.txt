@@ -1,4 +1,0 @@
-﻿# /robots.txt file for http://www.comparesupermarketoffers.co.uk
-
-User-agent: *
-Disallow:
