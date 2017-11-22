@@ -106,8 +106,9 @@
                     { "data": "Price", "autoWidth": true },
 
                  //   { "data": "Section", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://comparesupermarketprices.co.uk/supermarkets/search/' + data + '?section=' + data + '">' + data + '</a>'; } },
-                    { "data": "Section", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://localhost:37711/Supermarkets/search/' + data + '?sections=' + data + '">' + data + '</a>'; } },
-                //        { "data": "Section", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://christownhill.com/Supermarkets/search/' + data + '?section=' + data + '">' + data + '</a>'; } },
+                    //   { "data": "Section", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://localhost:37711/Supermarkets/search/' + data + '?sections=' + data + '">' + data + '</a>'; } },
+                    { "data": "Section", "render": function (data, type, full, meta) { var myurl = data.replace("&","and"); data = data.replace(",", " ").replace("search", ""); return '<a href="http://localhost:37711/Supermarkets/search/' + myurl + '?sections=' + myurl + '">' + data + '</a>'; } },
+           //        { "data": "Section", "render": function (data, type, full, meta) { data = data.replace("&", "and").replace(",", " ").replace("search", ""); return '<a href="http://christownhill.com/Supermarkets/search/' + data + '?section=' + data + '">' + data + '</a>'; } },
 
 
 
