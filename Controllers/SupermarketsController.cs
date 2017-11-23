@@ -185,8 +185,8 @@ namespace youtube.Controllers
                             var tmpStrSecond = string.Format("{0} ", keyword);
                             if (rec.Description.Contains(tmpStrSecond))
                             {
-                                rec.Description = rec.Description.Replace(tmpStr, string.Format("<a href='http://christownhill.com/supermarkets/search/{0}'>{1}</a>", keyword, tmpStr));
-                                //rec.Description = rec.Description.Replace(tmpStrSecond, string.Format("<a href='http://comparesupermarketprices.co.uk/supermarkets/search/{0}'>{1}</a>", keyword, tmpStrSecond));
+                              //  rec.Description = rec.Description.Replace(tmpStr, string.Format("<a href='http://christownhill.com/supermarkets/search/{0}'>{1}</a>", keyword, tmpStr));
+                                rec.Description = rec.Description.Replace(tmpStrSecond, string.Format("<a href='http://comparesupermarketprices.co.uk/supermarkets/search/{0}'>{1}</a>", keyword, tmpStrSecond));
                             }
                         }
                     }
