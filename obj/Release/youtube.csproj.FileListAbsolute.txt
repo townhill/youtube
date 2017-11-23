@@ -48,3 +48,4 @@ C:\Users\chris\Documents\Visual Studio 2017\Projects\youtube\bin\System.Web.WebP
 C:\Users\chris\Documents\Visual Studio 2017\Projects\youtube\bin\System.Web.WebPages.Razor.xml
 C:\Users\chris\Documents\Visual Studio 2017\Projects\youtube\obj\Release\youtube.dll
 C:\Users\chris\Documents\Visual Studio 2017\Projects\youtube\obj\Release\youtube.pdb
+C:\Users\chris\Documents\Visual Studio 2017\Projects\youtube\obj\Release\youtube.csprojResolveAssemblyReference.cache
