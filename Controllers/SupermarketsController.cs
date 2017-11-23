@@ -74,6 +74,11 @@ namespace youtube.Controllers
             var searchTerm = Request.Form.GetValues("search[value]").FirstOrDefault();
             searchTerm = Server.HtmlDecode(searchTerm);
 
+            // Try to fix some poor spellings
+            if (searchTerm.ToLower().Contains("warbut"))
+                searchTerm = searchTerm.Replace("warbut","warburt");
+
+
             // Trim off any spaces fro the end and remove common words like ' and ' , ' or ' , etc
            // var modifiedSearch = searchTerm.Replace(" and ", " ").Replace("&", "").Replace(" or ", " ").Replace(",", " ").Replace(".", " ").Replace("the ", "").Replace("-","").Replace("'","");
             var modifiedSearch = searchTerm.Replace(" and ", " ").Replace(" or ", " ").Replace(",", " ").Replace(".", " ").Replace("the ", "").Replace("-", "");
